@@ -1,5 +1,5 @@
 # Trajectory Analysis Pipeline - BeatAML Drug Combo Manuscript
-Trajectory Analysis for the Paper
+Methylation Analysis for the Paper
 
 # Setup
 
