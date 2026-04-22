@@ -1,5 +1,5 @@
-# Methylation Analysis - BeatAML Drug Combo Manuscript
-Methylation Analysis for the Paper
+# Analysis - BeatAML Drug Combo Manuscript
+Methylation analysis & Biomarker identification
 
 # Setup
 
@@ -26,7 +26,7 @@ Abbreviations for datasets involved
 
 # Workflow
 
-## Functions
+## Functions - Methylation Analysis
 
 | Functions | Remarks |
 | --- | --- |
