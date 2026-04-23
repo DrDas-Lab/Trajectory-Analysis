@@ -38,6 +38,9 @@ Abbreviations for datasets involved
 | `scripts/06_Methylation_processing.R` | Performs promoter methylation processing to generate a DNA methylation trajectory heatmap. | Inputs: <br/> `output/Meth_Expression.txt` <br/> `output/AML_Trajectory_Ordering.csv` <br/><br/> Outputs: <br/> `Methylation_expression.csv` <br/><br/> Plots: <br/> `plots/Methylation_Trajectory_Heatmap.pdf` <br/> Figure 6E |
 | `scripts/07_Correlation_plots.R` | Generates RNA vs methylation correlation Ridge and Mirror plots based on specific gene programs. | Inputs: <br/> `output/RNA_Expression.txt` <br/> `output/Meth_Expression.txt` <br/><br/> Plots: <br/> `plots/Correlation_RidgePlot.pdf` <br/> `plots/Correlation_MirrorPlot.pdf` <br/> SuppFig 7 f-g |
 
+
+
+
 ## Setup - Biomarker Identification
 
 
