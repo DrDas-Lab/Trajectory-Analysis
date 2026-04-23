@@ -1,7 +1,7 @@
 # Analysis - BeatAML Drug Combo Manuscript
 Methylation analysis & Biomarker identification
 
-# Setup - Methylation Analysis
+## Setup - Methylation Analysis
 
 R version: 4.5.3, renv 1.0.11
 
@@ -16,7 +16,7 @@ renv::restore()
 source('methylation_pipeline.R')
 ```
 
-## Data
+### Data
 
 Abbreviations for datasets involved
 
@@ -26,7 +26,7 @@ Abbreviations for datasets involved
 - Helsinki ([Malani et al 2022](https://doi.org/10.1158/2159-8290.cd-21-0410)) - fpmtb
 
 
-## Functions - Methylation Analysis
+### Functions - Methylation Analysis
 
 | Scripts | Remarks | Files |
 | --- | --- | --- |
@@ -38,10 +38,10 @@ Abbreviations for datasets involved
 | `scripts/06_Methylation_processing.R` | Performs promoter methylation processing to generate a DNA methylation trajectory heatmap. | Inputs: <br/> `output/Meth_Expression.txt` <br/> `output/AML_Trajectory_Ordering.csv` <br/><br/> Outputs: <br/> `Methylation_expression.csv` <br/><br/> Plots: <br/> `plots/Methylation_Trajectory_Heatmap.pdf` <br/> Figure 6E |
 | `scripts/07_Correlation_plots.R` | Generates RNA vs methylation correlation Ridge and Mirror plots based on specific gene programs. | Inputs: <br/> `output/RNA_Expression.txt` <br/> `output/Meth_Expression.txt` <br/><br/> Plots: <br/> `plots/Correlation_RidgePlot.pdf` <br/> `plots/Correlation_MirrorPlot.pdf` <br/> SuppFig 7 f-g |
 
-# Setup - Biomarker Identification
+## Setup - Biomarker Identification
 
 
-## Data
+### Data
 
 Abbreviations for datasets involved
 
