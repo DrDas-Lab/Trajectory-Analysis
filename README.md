@@ -1,21 +1,22 @@
 # Analysis - BeatAML Drug Combo Manuscript
 Methylation analysis & Biomarker identification
 
-# Setup
+# Setup - Methylation Analysis
 
 R version: 4.5.3, renv 1.0.11
 
-To reproduce fully, refer to `src/init.R` for specific versions of packages used
+Refer to `init.R` for specific versions of packages used. To run the pipeline open the `methylation_pipeline.Rproj` file and initiate as follows
 
 ```r
-## restoring renv
+# Restoring R environments
 renv::activate()
 renv::restore()
+
+# Run the pipeline
+source('methylation_pipeline.R')
 ```
 
-Note: Seurat versions (4.3.0 vs 5.1.0) used to process single cell is different from the loaded renv and not included.
-
-# Data
+## Data
 
 Abbreviations for datasets involved
 
@@ -24,28 +25,26 @@ Abbreviations for datasets involved
 - Beat AML Ven Combinations ([Eide et al 2023](https://doi.org/10.1158/2643-3230.bcd-23-0014)) - bamlvencombo
 - Helsinki ([Malani et al 2022](https://doi.org/10.1158/2159-8290.cd-21-0410)) - fpmtb
 
-# Workflow
 
 ## Functions - Methylation Analysis
 
-| Functions | Remarks |
-| --- | --- |
-| `scripts/01_preprocess_counts_no.R` | Perform standard RNA-seq preprocessing by converting raw sequencing counts into a normalized, log-transformed expression matrix |
-| `scripts/02_CIBERSORT_pipeline_no.R` | A cellular deconvolution pipeline to estimate the proportions of specific AML (Acute Myeloid Leukemia) cell states within bulk RNA-seq samples. <br/> Modified version that return QC |
-| `scripts/03_ModuleScore_trajectory_no.R` | Calculates differentiation module scores to quantify stemness or mature-like for each AML sample and then orders them into a linear differentiation trajectory. |
-| `scripts/04_RNA_heatmap.R` | |
-| `scripts/Methylation_processing.R` |  |
-
-## Plotting
-
-| Code for Plotting | Remarks | Files | 
+| Functions | Remarks | Files |
 | --- | --- | --- |
-| `scripts/01_preprocess_counts_no.R`  |  |  |
-| `scripts/02_CIBERSORT_pipeline_no.R`  |  |  | |
-| `src/analysis/3.catboost.Rmd`  |  |  |  |
-| `src/analysis/4.RNA_clustering.Rmd`  |  |  |  |
-| `src/analysis/5.WGCNA.Rmd`  |  |  | Figure 5e <br/> SuppFig e-f |
-| `src/analysis/6.scrna.Rmd`  |  | | Figure 6 <br/> SuppFig 7 |
-| `src/analysis/7.clusterassoc.Rmd`  |  |  | Figure 7a-c |
-| `src/analysis/8.integrating_rna_prot.Rmd` |  |  | Figure 7d |
-| `src/analysis/9.biomarker_elastic.Rmd` |  | Supp Tables <br/> `output/oshu_biomarkers.csv` <br/> `output/biomarkers_elasticnet_summary.csv` <br/> Other Tables <br/> `output/supp/biomarkers_elasticnet_long.csv` <br/> `output/supp/elasticnet_perf_summary.csv` <br/> Other rds <br/> `output/rds/biomarkers_elasticnet.rds` | Figure 7e-g <br/> SuppFig 8 |
+| `scripts/01_preprocess_counts.R` | Perform standard RNA-seq preprocessing by converting raw sequencing counts into a normalized, log-transformed expression matrix | Inputs: <br/> `input/beataml_waves1to4_counts_dbgap.txt` <br/><br/> Outputs: <br/> `output/Expression_BAML_707_log2RPM.txt` |
+| `scripts/02_CIBERSORT_pipeline.R` | A cellular deconvolution pipeline to estimate the proportions of specific AML (Acute Myeloid Leukemia) cell states within bulk RNA-seq samples. <br/> Modified version that return QC | Inputs: <br/> `output/BAML_Normalized.txt` <br/> `input/AML_signature_matrix_M.txt` <br/><br/> Outputs: <br/> `output/CIBERSORT_mixture_RPM.txt` <br/> `output/CIBERSORT_AML_results.csv` <br/> `output/CIBERSORT_AML_malignant_normalized.csv` <br/> `output/AML_dominant_cell_state.csv` <br/><br/> Plots: <br/> `plots/CIBERSORT_AML_heatmap.pdf` <br/> `plots/CIBERSORT_AML_PCA.pdf` |
+| `scripts/03_Processing_RNA_Methylation_datasets.R` | Annotates methylation data and filters by promoters (TSS2000/TSS1500). Collapses to gene level and filters based on Figure 6F programs. | Inputs: <br/> `output/CIBERSORT_mixture_RPM.txt` <br/> `input/Methylation Beta Values_clean.csv` <br/><br/> Outputs: <br/> `Methylation_TSS_new.csv` <br/> `output/RNA_Expression.txt` <br/> `output/Meth_Expression.txt` |
+| `scripts/04_ModuleScore_trajectory.R` | Calculates AML differentiation module scores and generates ordered trajectory samples. Uses Seurat for AddModuleScore and PCA. | Inputs: <br/> `output/CIBERSORT_mixture_RPM.txt` <br/> `output/AML_dominant_cell_state.csv` <br/> `input/AMLCellType_Genesets.gmt` <br/><br/> Outputs: <br/> `output/AML_ModuleScores.csv` <br/> `output/AML_ModuleScore_PCA.csv` <br/> `output/AML_Trajectory_Ordering.csv` |
+| `scripts/05_RNA_heatmap.R` | Generates RNA differentiation trajectory heatmap | Inputs: <br/> `output/RNA_Expression.txt` <br/> `output/AML_Trajectory_Ordering.csv` <br/><br/> Plots: <br/> `plots/RNA_Trajectory_Heatmap.pdf` <br/> Figure 6E |
+| `scripts/06_Methylation_processing.R` | Performs promoter methylation processing to generate a DNA methylation trajectory heatmap. | Inputs: <br/> `output/Meth_Expression.txt` <br/> `output/AML_Trajectory_Ordering.csv` <br/><br/> Outputs: <br/> `Methylation_expression.csv` <br/><br/> Plots: <br/> `plots/Methylation_Trajectory_Heatmap.pdf` <br/> Figure 6E |
+| `scripts/07_Correlation_plots.R` | Generates RNA vs methylation correlation Ridge and Mirror plots based on specific gene programs. | Inputs: <br/> `output/RNA_Expression.txt` <br/> `output/Meth_Expression.txt` <br/><br/> Plots: <br/> `plots/Correlation_RidgePlot.pdf` <br/> `plots/Correlation_MirrorPlot.pdf` <br/> SuppFig 7 f-g |
+
+# Setup - Biomarker Identification
+
+
+## Data
+
+Abbreviations for datasets involved
+
+- Beat AML drug combo - bamlcombo; bamlcombi; oshu
+
+| `BiomarkerIdentification.R` | Processes AML expression data using Seurat (PCA, clustering, UMAP). Integrates clinical response metadata, calculates an "Inflammation" module score, and generates a targeted Z-scored heatmap comparing Complete Responders (CR) and Non-Responders (NR). | Inputs: <br/> `Merged_AML_data.csv` <br/> `response.csv` <br/><br/> Plots: <br/> `plots/Inflammatory_Genes.pdf` <br/> SuppFig 7 f-g |
