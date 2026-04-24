@@ -18,13 +18,6 @@ source('methylation_pipeline.R')
 
 ### Data
 
-Abbreviations for datasets involved
-
-- Beat AML drug combo - bamlcombo; bamlcombi; oshu
-- Beat AML 2.0 ([Tyner et al 2018](https://doi.org/10.1038/s41586-018-0623-z), [Bottomly et al 2022](https://doi.org/10.1016/j.ccell.2022.07.002)) - baml
-- Beat AML Ven Combinations ([Eide et al 2023](https://doi.org/10.1158/2643-3230.bcd-23-0014)) - bamlvencombo
-- Helsinki ([Malani et al 2022](https://doi.org/10.1158/2159-8290.cd-21-0410)) - fpmtb
-
 
 ### Functions - Methylation Analysis
 
@@ -38,17 +31,14 @@ Abbreviations for datasets involved
 | `scripts/06_Methylation_heatmap.R` | Performs promoter methylation processing to generate a DNA methylation trajectory heatmap. | Inputs: <br/> `output/Meth_Expression.txt` <br/> `output/AML_Trajectory_Ordering.csv` <br/><br/> Outputs: <br/> `Methylation_expression.csv` <br/><br/> Plots: <br/> `plots/Methylation_Trajectory_Heatmap.pdf` <br/> Figure 6E |
 | `scripts/07_Correlation_plots.R` | Generates RNA vs methylation correlation Ridge and Mirror plots based on specific gene programs. | Inputs: <br/> `output/RNA_Expression.txt` <br/> `output/Meth_Expression.txt` <br/><br/> Plots: <br/> `plots/Correlation_RidgePlot.pdf` <br/> `plots/Correlation_MirrorPlot.pdf` <br/> SuppFig 7 f-g |
 
-
+<br/>
+<br/>
 
 
 ## Setup - Biomarker Identification
 
 
 ### Data
-
-Abbreviations for datasets involved
-
-- Beat AML drug combo - bamlcombo; bamlcombi; oshu
 
 | Script | Remarks | Files |
 | --- | --- | --- |
