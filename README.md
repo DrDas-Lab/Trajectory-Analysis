@@ -5,7 +5,12 @@ Methylation analysis & Biomarker identification
 
 R version: 4.5.3, renv 1.2.2
 
-Refer to `init.R` for specific versions of packages used. To run the pipeline open the `pipeline.Rproj` file and initiate as follows
+Refer to `init.R` for specific versions of packages used. 
+
+Steps to run the pipeline:
+1. Download the Methylation Expression folder from GitHub and extract the scripts.
+2. Download the [Methylation_expression.zip from Zenodo and extract the contents]([url](https://zenodo.org/uploads/18409437?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjdiNWZjOWMwLWQzODgtNGUxMC1iMGI4LWZlNDgwMTZkZDEyMyIsImRhdGEiOnt9LCJyYW5kb20iOiIwNWNhZTQ1ODFiMmU1ODg5MGRhYzAxMzgyM2MwZjVkYSJ9.-zvMMN9v27c_RGUSR_G7VE-q359QChg99A7ncmeV0tOyO0AHcbqTdCkNoo7GVym8JLX-vWasS0pFRr2cuvQBJQ)) into the folder containing the scripts such that the folder contains the scripts and 3 folders (input, output and plots).
+3. Open the `pipeline.Rproj` file and initiate as follows:
 
 ```r
 # Restoring R environments
@@ -15,9 +20,6 @@ renv::restore()
 # Run the pipeline
 source('run_pipeline.R')
 ```
-
-### Data
-
 
 ### Functions - Methylation Analysis
 
@@ -37,8 +39,11 @@ source('run_pipeline.R')
 
 ## Setup - Biomarker Identification
 
+Steps to run the pipeline:
+1. Download the Biomarker Identification folder from GitHub and extract the scripts.
+2. Download the [Biomarkers.zip from Zenodo and extract the contents]([url](https://zenodo.org/uploads/18409437?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjdiNWZjOWMwLWQzODgtNGUxMC1iMGI4LWZlNDgwMTZkZDEyMyIsImRhdGEiOnt9LCJyYW5kb20iOiIwNWNhZTQ1ODFiMmU1ODg5MGRhYzAxMzgyM2MwZjVkYSJ9.-zvMMN9v27c_RGUSR_G7VE-q359QChg99A7ncmeV0tOyO0AHcbqTdCkNoo7GVym8JLX-vWasS0pFRr2cuvQBJQ)) into the previously extracted folder.
+3. Run `BiomarkerIdentification.R`.
 
-### Data
 
 | Script | Remarks | Files |
 | --- | --- | --- |
